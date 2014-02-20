@@ -23,6 +23,8 @@ public class MiFareImage4K extends MiFareImage {
 	public MiFareImage4K() {
 		image = new byte[CAPACITY];
 		bit_sectors = new byte[(short) ((LOWER_SECTOR_NUMBER + UPPER_SECTOR_NUMBER) / ((byte) 0x08))];
+		password = new byte[(short) (LOWER_SECTOR_NUMBER + UPPER_SECTOR_NUMBER)
+				* PASSWORD_LENGTH];
 	}
 
 	protected short getTrailerOffset(byte sector) {
@@ -66,10 +68,6 @@ public class MiFareImage4K extends MiFareImage {
 		checkBlock(sector, block);
 		return (sector < LOWER_BLOCK_NUMBER) ? (block == (byte) (LOWER_BLOCK_NUMBER - 0x01))
 				: (block == (byte) (UPPER_BLOCK_NUMBER - 0x01));
-	}
-
-	public short getCapacity() {
-		return CAPACITY;
 	}
 
 	protected short getExportLength() {

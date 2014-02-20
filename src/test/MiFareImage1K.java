@@ -22,6 +22,7 @@ public class MiFareImage1K extends MiFareImage {
 	public MiFareImage1K() {
 		image = new byte[CAPACITY];
 		bit_sectors = new byte[(short) (SECTOR_NUMBER / ((byte) 0x08))];
+		password = new byte[(short) (SECTOR_NUMBER * PASSWORD_LENGTH)];
 	}
 
 	protected short getBlockOffset(byte sector, byte block) {
@@ -44,10 +45,6 @@ public class MiFareImage1K extends MiFareImage {
 			throws ISOException {
 		checkBlock(sector, block);
 		return block == (byte) (BLOCK_NUMBER - 0x01);
-	}
-
-	public short getCapacity() {
-		return CAPACITY;
 	}
 
 	protected short getExportLength() {
