@@ -317,6 +317,9 @@ public abstract class MiFareImage {
 	 *            - number of sector to calculate for
 	 */
 	protected void calculatePassword(byte sector) {
+		// null our key
+		for (i = 0x00; i < PASSWORD_LENGTH * 2; i++)
+			DKey[i] = 0x00;
 		// DKey = 16 bytes : {inverted(DKeyA)(8 bytes), inverted(DKeyB)(8
 		// bytes)}
 		for (i = 0x00; i < 0x06; i++) {
